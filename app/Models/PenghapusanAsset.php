@@ -11,4 +11,13 @@ class PenghapusanAsset extends Model
     public function asset() {
         return $this->belongsTo(Asset::class);
     }
+    protected static function booted()
+{
+    static::created(function ($penghapusan) {
+        $penghapusan->asset()->update([
+            'status' => 'dihapus',
+        ]);
+    });
+}
+
 }
