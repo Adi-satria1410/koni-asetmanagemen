@@ -12,45 +12,30 @@ class AssetForm
     public static function configure(Schema $schema): Schema
     {
         return $schema
-    ->components([
-        TextInput::make('kode')
-            ->required(),
-
-        TextInput::make('nama')
-            ->required(),
-
-        Select::make('kategori_asset_id')
-            ->label('Kategori Aset')
-            ->relationship('kategori', 'nama')
-            ->required(),
-
-        Select::make('lokasi_id')
-            ->relationship('lokasi', 'nama')
-            ->required(),
-
-        Select::make('kondisi_asset_id')
-            ->label('Kondisi')
-            ->relationship('kondisi', 'nama')
-            ->required(),
-
-        Select::make('supplier_id')
-            ->relationship('supplier', 'nama')
-            ->searchable(),
-
-        DatePicker::make('tanggal_perolehan')
-            ->required(),
-
-        TextInput::make('nilai')
-            ->numeric()
-            ->required(),
-
-        Select::make('status')
-            ->options([
-                'aktif' => 'Aktif',
-                'dipinjam' => 'Dipinjam',
-                'dihapus' => 'Dihapus',
-            ])
-            ->required(),
-    ]);
+            ->components([
+                TextInput::make('kode')
+                    ->required(),
+                TextInput::make('nama')
+                    ->required(),
+                TextInput::make('kategori_asset_id')
+                    ->required()
+                    ->numeric(),
+                TextInput::make('lokasi_id')
+                    ->required()
+                    ->numeric(),
+                TextInput::make('kondisi_asset_id')
+                    ->required()
+                    ->numeric(),
+                TextInput::make('supplier_id')
+                    ->numeric(),
+                DatePicker::make('tanggal_perolehan')
+                    ->required(),
+                TextInput::make('nilai')
+                    ->required()
+                    ->numeric(),
+                Select::make('status')
+                    ->options(['aktif' => 'Aktif', 'dipinjam' => 'Dipinjam', 'dihapus' => 'Dihapus'])
+                    ->required(),
+            ]);
     }
 }

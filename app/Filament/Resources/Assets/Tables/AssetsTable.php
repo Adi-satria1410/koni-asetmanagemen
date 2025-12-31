@@ -14,38 +14,51 @@ class AssetsTable
     public static function configure(Table $table): Table
     {
         return $table
-    ->columns([
-        TextColumn::make('kode')->searchable(),
-        TextColumn::make('nama')->searchable(),
-
-        TextColumn::make('kategori.nama')
-            ->label('Kategori'),
-
-        TextColumn::make('lokasi.nama'),
-
-        TextColumn::make('kondisi.nama')
-            ->label('Kondisi'),
-
-        TextColumn::make('supplier.nama')
-            ->label('Supplier'),
-
-        TextColumn::make('tanggal_perolehan')->date(),
-
-        TextColumn::make('nilai')->money('IDR'),
-
-        TextColumn::make('status')->badge(),
-    ])
+            ->columns([
+                TextColumn::make('kode')
+                    ->searchable(),
+                TextColumn::make('nama')
+                    ->searchable(),
+                TextColumn::make('kategori_asset_id')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('lokasi_id')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('kondisi_asset_id')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('supplier_id')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('tanggal_perolehan')
+                    ->date()
+                    ->sortable(),
+                TextColumn::make('nilai')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('status')
+                    ->badge(),
+                TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+            ])
             ->filters([
                 //
             ])
-    ->recordActions([
-        ViewAction::make(),
-        EditAction::make(),
-    ])
-    ->toolbarActions([
-        BulkActionGroup::make([
-            DeleteBulkAction::make(),
-        ]),
-    ]);
+            ->recordActions([
+                ViewAction::make(),
+                EditAction::make(),
+            ])
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
+            ]);
     }
 }
